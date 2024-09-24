@@ -10,7 +10,6 @@ $error-color-light: #FF3535;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
 body {
@@ -27,20 +26,26 @@ svg {
   border-radius: 12px;
   width: 700px;
 
+  // &__Row {
+  //   max-height: 50px;
+  //   height: 50px;
+  // }
+
   &__Day {
     color: $secondary-color;
     cursor: pointer;
-  }
-
-  &__Timeslots {
-    .Delete-Slots {
-      cursor: pointer;
-    }
+    width: 20%;
   }
 
   &__actions {
-    .Add-Slots, .Copy-Slots, .FullDayShift-Slots {
+    margin-left: auto;
+
+    & .Add-Slots, & .Copy-Slots, & .FullDayShift-Slots {
       cursor: pointer;
     }
   }
+}
+
+.Availability-form__slot .Delete-Slots {
+  cursor: pointer;
 }

@@ -1,9 +1,9 @@
 import AvailabilityRow from './AvailabilityRow'
 
-function AvailabilityDays({ days }) {
+function AvailabilityForm({ days }) {
   return (
     <>
-      <div className="Availability-form__Rows">
+      <div className="Availability-form__Rows d-flex flex-column gap-3">
         { 
           days.map((item, index) => {
             return <AvailabilityRow key={index} days={item} />
@@ -14,4 +14,4 @@ function AvailabilityDays({ days }) {
   )
 }
 
-export default AvailabilityDays;
+export default AvailabilityForm;

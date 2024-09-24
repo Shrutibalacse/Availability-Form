@@ -1,9 +1,13 @@
-function AvailabilityForm({ days , setUnavailable }) {
+function AvailabilityDay({ days , isChecked , setIsChecked , check }) {
   return (
     <>
       <div className="Availability-form__Day">
         <label htmlFor="day">
-          <input type="checkbox" onClick={setUnavailable} className="form-check-input me-2" name="" id="day" />
+          <input type="checkbox" 
+            checked={isChecked}
+            onChange={(e) => setIsChecked(e.target.checked)} 
+            onClick={check}
+            className="form-check-input me-2" name="" id="day" />
           <label htmlFor="day" className="Availability-form__Day">
             {days}
           </label>
@@ -13,4 +17,4 @@ function AvailabilityForm({ days , setUnavailable }) {
   );
 }
 
-export default AvailabilityForm;
+export default AvailabilityDay;

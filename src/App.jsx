@@ -1,5 +1,5 @@
 import './App.scss'
-import AvailabilityDays from './components/AvailabilityForm';
+import AvailabilityForm from './components/AvailabilityForm';
 
 function App() {
   const Days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       <div className="Availability-form p-4">
-        <h3 className='text-white py-3'>Availability</h3>
-        <AvailabilityDays days={Days} />
+        <h3 className='text-white py-3 text-center'>Availability</h3>
+        <AvailabilityForm days={Days} />
       </div>
     </>
   )
