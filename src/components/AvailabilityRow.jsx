@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import Actions from "./Actions";
 import AvailabilityDay from "./AvailabilityDay";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import TimeSlotsContainer from "./TimeSlotsContainer";
 
 function AvailabilityRow({ days }) {
@@ -24,21 +24,26 @@ function AvailabilityRow({ days }) {
     }
   }
 
-  function check() {
-    console.log(isChecked)
+  function handleCheckboxChange(e) {
+    const checked = e.target.checked;
+    setIsChecked(checked); //updating state(true/false)
+  
+    // If checkbox is checked and no slots are present, add the first slot
+    if (checked && addSlotsList.length === 0) {
+      handleAddTimeSlots();
+    }
   }
-
+  
   return (
     <>
       <div className="Availability-form__Row d-flex gap-5">
         <AvailabilityDay 
           days={days} 
           isChecked = {isChecked}
-          setIsChecked = {setIsChecked}
-          check={check}
+          handleCheckboxChange={handleCheckboxChange}
         />
         {isChecked ? 
-          <TimeSlotsContainer addSlots={handleAddTimeSlots} addSlotsList={addSlotsList} deleteSlots={handleDelete} /> 
+          <TimeSlotsContainer addSlotsList={addSlotsList} deleteSlots={handleDelete} /> 
             : 
           <p className="Unavailable">Unavailable</p>}
         <Actions addSlots={handleAddTimeSlots} /> 
