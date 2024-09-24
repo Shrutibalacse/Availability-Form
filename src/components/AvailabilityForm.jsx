@@ -6,7 +6,7 @@ function AvailabilityForm({ days }) {
       <div className="Availability-form__Rows d-flex flex-column gap-3">
         { 
           days.map((item, index) => {
-            return <AvailabilityRow key={index} days={item} />
+            return <AvailabilityRow key={item} day={item} />
           })
         }
       </div>
