@@ -2,7 +2,7 @@ import { FaCirclePlus } from "react-icons/fa6";
 import { IoCopy } from "react-icons/io5";
 import { Ri24HoursFill } from "react-icons/ri";
 
-function Actions({ addSlots , fullDayShift  }) {
+function Actions({ addSlots , copySlots , fullDayShift }) {
   return (
     <>
        <div className="Availability-form__actions d-flex gap-3">
@@ -10,7 +10,7 @@ function Actions({ addSlots , fullDayShift  }) {
             {/* <img src="../assets/availability-plus-icon 3.38.52 PM.svg" alt="" /> */}
             <FaCirclePlus />
           </a>
-          <a className="Copy-Slots">
+          <a className="Copy-Slots" onClick={copySlots}>
             {/* <img src="../assets/availability-copy-icon.svg" alt="" /> */}
             <IoCopy />
           </a>

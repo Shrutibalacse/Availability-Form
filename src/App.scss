@@ -26,10 +26,9 @@ svg {
   border-radius: 12px;
   width: 700px;
 
-  // &__Row {
-  //   max-height: 50px;
-  //   height: 50px;
-  // }
+  &__Row {
+    min-height: 40px;
+  }
 
   &__Day {
     color: $secondary-color;
