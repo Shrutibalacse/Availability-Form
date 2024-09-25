@@ -5,13 +5,10 @@ import { useState } from "react";
 import TimeSlotsContainer from "./TimeSlotsContainer";
 
 function AvailabilityRow({ day , dayState , updateDayState }) {
-  // const [isChecked, setIsChecked] = useState(false);
-  // const [addSlotsList, setAddSlotsList] = useState([]);
-  // const [fullDayShift, setFullDayShift] = useState(false);
 
   const { isChecked, addSlotsList, fullDayShift } = dayState[day] || {
     isChecked: false,
-    addSlotsList: addSlotsList,
+    addSlotsList: [],
     fullDayShift: false
   }
 
@@ -27,7 +24,7 @@ function AvailabilityRow({ day , dayState , updateDayState }) {
       
     // }
     updateDayState(day, {
-      addSlotsList: [...addSlotsList, { id: uuidv4() }],
+      addSlotsList: [...addSlotsList, { id: uuidv4() , startTime: "", endTime: ""}],
       isChecked: true
     })
   }
@@ -88,16 +85,25 @@ function AvailabilityRow({ day , dayState , updateDayState }) {
   function handleCopySlots() {
     Object.keys(dayState).forEach((targetDay) => {
       if (dayState[targetDay].isChecked && targetDay !== day) {
-        // Determine if the current day is in the "Unavailable" state
         const isCurrentDayUnavailable = !isChecked && addSlotsList.length === 0 && !fullDayShift;
 
-        // Update target day's state based on the current day's state
         updateDayState(targetDay, {
-          addSlotsList: addSlotsList, 
-          fullDayShift: fullDayShift, 
-          isChecked: isCurrentDayUnavailable ? false : true, 
+          addSlotsList: addSlotsList.map((slot) => ({ ...slot, id: uuidv4() })), // Copy slots but give copied slots new id
+          fullDayShift: fullDayShift,
+          isChecked: isCurrentDayUnavailable ? false : true,
         });
       }
+      console.log("yess")
+      console.log(addSlotsList);
+    });
+  }
+
+  function handleSlots(id, updatedData) {
+    const updatedSlots = addSlotsList.map((slot) =>
+      slot.id === id ? { ...slot, ...updatedData } : slot
+    );
+    updateDayState(day, {
+      addSlotsList: updatedSlots,
     });
   }
 
@@ -110,7 +116,7 @@ function AvailabilityRow({ day , dayState , updateDayState }) {
           {fullDayShift ? (
             <p className="full-day-shift-text">24-hour shift activated</p>
           ) : isChecked ? (
-            <TimeSlotsContainer addSlotsList={addSlotsList} deleteSlots={handleDelete} />
+            <TimeSlotsContainer addSlotsList={addSlotsList} deleteSlots={handleDelete} handleSlots={handleSlots} />
           ) : (
             <p className="Unavailable">Unavailable</p>
           )}
