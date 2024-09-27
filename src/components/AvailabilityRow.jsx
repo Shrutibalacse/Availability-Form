@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import Actions from "./Actions";
 import AvailabilityDay from "./AvailabilityDay";
-import { useState } from "react";
 import TimeSlotsContainer from "./TimeSlotsContainer";
 
 function AvailabilityRow({ day , dayState , updateDayState }) {
@@ -19,7 +18,7 @@ function AvailabilityRow({ day , dayState , updateDayState }) {
         fullDayShift: false
       })
     }
-    // when the checkbox is unchecked and there are slots, now a slot is added, first slotmust be added rather appendng a slot in existing slots 
+    // when the checkbox is unchecked and there are slots, now a slot is added, first slot must be added rather appendng a slot in existing slots 
     // if(!isChecked){
       
     // }
@@ -105,6 +104,7 @@ function AvailabilityRow({ day , dayState , updateDayState }) {
     updateDayState(day, {
       addSlotsList: updatedSlots,
     });
+    console.log("updatedSlots", updatedSlots)
   }
 
   return (

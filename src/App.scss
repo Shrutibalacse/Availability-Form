@@ -30,9 +30,20 @@ svg {
     min-height: 40px;
   }
 
+  & .formError {
+    margin-bottom: 0;
+    color: #FF0000;
+    text-align: end;
+    font-size: 12px;
+    min-height: 20px;
+  }
+  
+  &__slot .formError {
+    max-width: 130px;
+  }
+
   &__Day {
     color: $secondary-color;
-    cursor: pointer;
     width: 20%;
 
     label, input {
@@ -49,8 +60,18 @@ svg {
   }
 }
 
-.Availability-form__slot .Delete-Slots {
+.Availability-form__slot {
+  .Delete-Slots {
   cursor: pointer;
+  }
+
+  .Start-time, .End-time {
+    min-width: 130px;
+
+    & input {
+      width: 100%;
+    }
+  }
 }
 
 .Availability-form__Submit {

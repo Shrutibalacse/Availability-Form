@@ -9,13 +9,15 @@ function AvailabilityForm({ days }) {
     },{})
   )
 
+  const [formError, setFormError] = useState("")
+
   function updateDayState(day, updatedSate) {
     setDayState((prevDayState)=> ({...prevDayState, [day]: {...prevDayState[day], ...updatedSate}}))
   }
 
   function handleSubmit() {
     const formData = Object.keys(dayState).map((day) => {
-      const {isChecked, addSlotsList, fullDayShift} = dayState[day]
+      const {isChecked, addSlotsList, fullDayShift} = dayState[day] // extracting values fromm daystate of current day
 
       return {
         day, 
@@ -23,6 +25,15 @@ function AvailabilityForm({ days }) {
         slots: fullDayShift ? "Activated Full Day Shift" : isChecked ? addSlotsList : "Unavailable"
       }
     })
+
+    const formErrorCheck = formData.some((day) => day.isChecked || day.slots != 'Unavailable')
+    if(!formErrorCheck) {
+      setFormError("Please select atleast one Time Slot")
+      return // stops form submissiom
+    }
+    else {
+      setFormError("")
+    }
 
     console.log(formData)
   }
@@ -39,6 +50,7 @@ function AvailabilityForm({ days }) {
             return <AvailabilityRow key={index} day={item} dayState={dayState} updateDayState={updateDayState} />
           })
         }
+        <p className='formError'>{formError}</p>
         <button className="Availability-form__Submit" onClick={handleSubmit}>Submit</button>
       </div>
     </>
